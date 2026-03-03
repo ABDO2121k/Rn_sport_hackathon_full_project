@@ -1,0 +1,284 @@
+{
+  "players": [
+    {
+      "id": 1,
+      "name": "Marcus Johnson",
+      "email":"abdomsawi011@gmail.com",
+      "position": "Forward",
+      "team": "Thunder FC",
+      "jerseyNumber": 10,
+      "stats": {
+        "gamesPlayed": 28,
+        "goals": 18,
+        "assists": 12,
+        "shots": 95,
+        "shotsOnTarget": 62,
+        "passAccuracy": 78.5,
+        "dribbles": 87,
+        "fouls": 14
+      },
+      "physical": {
+        "height": 185,
+        "weight": 78,
+        "age": 24
+      }
+    },
+    {
+      "id": 2,
+      "name": "David Martinez",
+      "position": "Midfielder",
+      "team": "Thunder FC",
+      "jerseyNumber": 8,
+      "stats": {
+        "gamesPlayed": 30,
+        "goals": 5,
+        "assists": 15,
+        "shots": 42,
+        "shotsOnTarget": 28,
+        "passAccuracy": 89.3,
+        "dribbles": 65,
+        "tackles": 48,
+        "interceptions": 35,
+        "fouls": 22
+      },
+      "physical": {
+        "height": 178,
+        "weight": 72,
+        "age": 26
+      }
+    },
+    {
+      "id": 3,
+      "name": "Alessandro Rossi",
+      "position": "Defender",
+      "team": "Thunder FC",
+      "jerseyNumber": 4,
+      "stats": {
+        "gamesPlayed": 29,
+        "goals": 2,
+        "assists": 3,
+        "shots": 15,
+        "shotsOnTarget": 8,
+        "passAccuracy": 85.2,
+        "tackles": 78,
+        "interceptions": 52,
+        "clearances": 95,
+        "blocks": 38,
+        "fouls": 18
+      },
+      "physical": {
+        "height": 188,
+        "weight": 82,
+        "age": 28
+      }
+    },
+    {
+      "id": 4,
+      "name": "James Peterson",
+      "position": "Goalkeeper",
+      "team": "Thunder FC",
+      "jerseyNumber": 1,
+      "stats": {
+        "gamesPlayed": 30,
+        "saves": 102,
+        "cleanSheets": 14,
+        "goalsConceded": 22,
+        "savePercentage": 82.3,
+        "punches": 18,
+        "catches": 45,
+        "distributions": 312
+      },
+      "physical": {
+        "height": 193,
+        "weight": 88,
+        "age": 29
+      }
+    },
+    {
+      "id": 5,
+      "name": "Lucas Silva",
+      "position": "Forward",
+      "team": "Lions United",
+      "jerseyNumber": 9,
+      "stats": {
+        "gamesPlayed": 27,
+        "goals": 22,
+        "assists": 8,
+        "shots": 108,
+        "shotsOnTarget": 71,
+        "passAccuracy": 74.8,
+        "dribbles": 92,
+        "fouls": 19
+      },
+      "physical": {
+        "height": 182,
+        "weight": 75,
+        "age": 23
+      }
+    },
+    {
+      "id": 6,
+      "name": "Mohammed Al-Hassan",
+      "position": "Midfielder",
+      "team": "Lions United",
+      "jerseyNumber": 6,
+      "stats": {
+        "gamesPlayed": 28,
+        "goals": 7,
+        "assists": 11,
+        "shots": 38,
+        "shotsOnTarget": 24,
+        "passAccuracy": 87.9,
+        "dribbles": 58,
+        "tackles": 52,
+        "interceptions": 41,
+        "fouls": 25
+      },
+      "physical": {
+        "height": 180,
+        "weight": 74,
+        "age": 25
+      }
+    },
+    {
+      "id": 7,
+      "name": "Erik Andersson",
+      "position": "Defender",
+      "team": "Lions United",
+      "jerseyNumber": 5,
+      "stats": {
+        "gamesPlayed": 30,
+        "goals": 1,
+        "assists": 2,
+        "shots": 12,
+        "shotsOnTarget": 5,
+        "passAccuracy": 83.7,
+        "tackles": 85,
+        "interceptions": 58,
+        "clearances": 108,
+        "blocks": 42,
+        "fouls": 21
+      },
+      "physical": {
+        "height": 190,
+        "weight": 84,
+        "age": 27
+      }
+    },
+    {
+      "id": 8,
+      "name": "Carlos Mendez",
+      "position": "Goalkeeper",
+      "team": "Lions United",
+      "jerseyNumber": 1,
+      "stats": {
+        "gamesPlayed": 28,
+        "saves": 95,
+        "cleanSheets": 12,
+        "goalsConceded": 25,
+        "savePercentage": 79.2,
+        "punches": 22,
+        "catches": 38,
+        "distributions": 285
+      },
+      "physical": {
+        "height": 191,
+        "weight": 86,
+        "age": 31
+      }
+    },
+    {
+      "id": 9,
+      "name": "Kevin O'Brien",
+      "position": "Forward",
+      "team": "Eagles FC",
+      "jerseyNumber": 11,
+      "stats": {
+        "gamesPlayed": 25,
+        "goals": 15,
+        "assists": 10,
+        "shots": 82,
+        "shotsOnTarget": 54,
+        "passAccuracy": 76.2,
+        "dribbles": 73,
+        "fouls": 16
+      },
+      "physical": {
+        "height": 183,
+        "weight": 77,
+        "age": 22
+      }
+    },
+    {
+      "id": 10,
+      "name": "Yuki Tanaka",
+      "position": "Midfielder",
+      "team": "Eagles FC",
+      "jerseyNumber": 7,
+      "stats": {
+        "gamesPlayed": 29,
+        "goals": 6,
+        "assists": 13,
+        "shots": 45,
+        "shotsOnTarget": 30,
+        "passAccuracy": 88.5,
+        "dribbles": 71,
+        "tackles": 45,
+        "interceptions": 38,
+        "fouls": 20
+      },
+      "physical": {
+        "height": 175,
+        "weight": 70,
+        "age": 24
+      }
+    },
+    {
+      "id": 11,
+      "name": "Pierre Dubois",
+      "position": "Defender",
+      "team": "Eagles FC",
+      "jerseyNumber": 3,
+      "stats": {
+        "gamesPlayed": 27,
+        "goals": 3,
+        "assists": 4,
+        "shots": 18,
+        "shotsOnTarget": 10,
+        "passAccuracy": 84.8,
+        "tackles": 72,
+        "interceptions": 48,
+        "clearances": 89,
+        "blocks": 35,
+        "fouls": 15
+      },
+      "physical": {
+        "height": 186,
+        "weight": 80,
+        "age": 26
+      }
+    },
+    {
+      "id": 12,
+      "name": "Andre Santos",
+      "position": "Goalkeeper",
+      "team": "Eagles FC",
+      "jerseyNumber": 1,
+      "stats": {
+        "gamesPlayed": 29,
+        "saves": 98,
+        "cleanSheets": 13,
+        "goalsConceded": 24,
+        "savePercentage": 80.3,
+        "punches": 20,
+        "catches": 42,
+        "distributions": 298
+      },
+      "physical": {
+        "height": 192,
+        "weight": 87,
+        "age": 27
+      }
+    }
+  ]
+}

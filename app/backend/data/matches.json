@@ -1,0 +1,356 @@
+{
+  "matches": [
+    {
+      "id": 1,
+      "homeTeam": "Thunder FC",
+      "awayTeam": "Lions United",
+      "date": "2025-12-15T18:00:00Z",
+      "venue": "Thunder Stadium",
+      "status": "completed",
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "possession": {
+          "home": 58,
+          "away": 42
+        },
+        "shots": {
+          "home": 15,
+          "away": 11
+        },
+        "shotsOnTarget": {
+          "home": 8,
+          "away": 5
+        },
+        "corners": {
+          "home": 7,
+          "away": 4
+        },
+        "fouls": {
+          "home": 12,
+          "away": 15
+        },
+        "yellowCards": {
+          "home": 2,
+          "away": 3
+        },
+        "redCards": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "events": [
+        {
+          "minute": 23,
+          "type": "goal",
+          "team": "Thunder FC",
+          "player": "Marcus Johnson",
+          "assist": "David Martinez"
+        },
+        {
+          "minute": 45,
+          "type": "yellow_card",
+          "team": "Lions United",
+          "player": "Erik Andersson"
+        },
+        {
+          "minute": 62,
+          "type": "goal",
+          "team": "Lions United",
+          "player": "Lucas Silva",
+          "assist": "Mohammed Al-Hassan"
+        },
+        {
+          "minute": 78,
+          "type": "goal",
+          "team": "Thunder FC",
+          "player": "Marcus Johnson",
+          "assist": null
+        }
+      ],
+      "detectedObjects": {
+        "ball": {
+          "trackingAccuracy": 98.5,
+          "totalTrackedFrames": 5842
+        },
+        "players": {
+          "detected": 22,
+          "trackingAccuracy": 96.3
+        },
+        "referee": {
+          "detected": 3,
+          "trackingAccuracy": 94.1
+        }
+      }
+    },
+    {
+      "id": 2,
+      "homeTeam": "Eagles FC",
+      "awayTeam": "Thunder FC",
+      "date": "2025-12-22T20:00:00Z",
+      "venue": "Eagles Arena",
+      "status": "completed",
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "stats": {
+        "possession": {
+          "home": 45,
+          "away": 55
+        },
+        "shots": {
+          "home": 9,
+          "away": 18
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 12
+        },
+        "corners": {
+          "home": 3,
+          "away": 8
+        },
+        "fouls": {
+          "home": 14,
+          "away": 10
+        },
+        "yellowCards": {
+          "home": 3,
+          "away": 1
+        },
+        "redCards": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "events": [
+        {
+          "minute": 12,
+          "type": "goal",
+          "team": "Thunder FC",
+          "player": "Marcus Johnson",
+          "assist": "David Martinez"
+        },
+        {
+          "minute": 34,
+          "type": "goal",
+          "team": "Eagles FC",
+          "player": "Kevin O'Brien",
+          "assist": "Yuki Tanaka"
+        },
+        {
+          "minute": 55,
+          "type": "yellow_card",
+          "team": "Eagles FC",
+          "player": "Pierre Dubois"
+        },
+        {
+          "minute": 68,
+          "type": "goal",
+          "team": "Thunder FC",
+          "player": "David Martinez",
+          "assist": null
+        },
+        {
+          "minute": 89,
+          "type": "goal",
+          "team": "Thunder FC",
+          "player": "Marcus Johnson",
+          "assist": "David Martinez"
+        }
+      ],
+      "detectedObjects": {
+        "ball": {
+          "trackingAccuracy": 97.8,
+          "totalTrackedFrames": 5921
+        },
+        "players": {
+          "detected": 22,
+          "trackingAccuracy": 95.7
+        },
+        "referee": {
+          "detected": 3,
+          "trackingAccuracy": 93.5
+        }
+      }
+    },
+    {
+      "id": 3,
+      "homeTeam": "Lions United",
+      "awayTeam": "Eagles FC",
+      "date": "2025-12-28T17:30:00Z",
+      "venue": "Lions Den",
+      "status": "completed",
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "possession": {
+          "home": 52,
+          "away": 48
+        },
+        "shots": {
+          "home": 14,
+          "away": 13
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 6
+        },
+        "corners": {
+          "home": 6,
+          "away": 5
+        },
+        "fouls": {
+          "home": 11,
+          "away": 13
+        },
+        "yellowCards": {
+          "home": 2,
+          "away": 2
+        },
+        "redCards": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "events": [
+        {
+          "minute": 18,
+          "type": "goal",
+          "team": "Lions United",
+          "player": "Lucas Silva",
+          "assist": null
+        },
+        {
+          "minute": 32,
+          "type": "goal",
+          "team": "Eagles FC",
+          "player": "Kevin O'Brien",
+          "assist": "Yuki Tanaka"
+        },
+        {
+          "minute": 58,
+          "type": "yellow_card",
+          "team": "Lions United",
+          "player": "Mohammed Al-Hassan"
+        },
+        {
+          "minute": 71,
+          "type": "goal",
+          "team": "Lions United",
+          "player": "Lucas Silva",
+          "assist": "Mohammed Al-Hassan"
+        },
+        {
+          "minute": 85,
+          "type": "goal",
+          "team": "Eagles FC",
+          "player": "Kevin O'Brien",
+          "assist": null
+        }
+      ],
+      "detectedObjects": {
+        "ball": {
+          "trackingAccuracy": 98.2,
+          "totalTrackedFrames": 5798
+        },
+        "players": {
+          "detected": 22,
+          "trackingAccuracy": 96.8
+        },
+        "referee": {
+          "detected": 3,
+          "trackingAccuracy": 95.2
+        }
+      }
+    },
+    {
+      "id": 4,
+      "homeTeam": "Thunder FC",
+      "awayTeam": "Eagles FC",
+      "date": "2026-01-08T19:00:00Z",
+      "venue": "Thunder Stadium",
+      "status": "scheduled",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "stats": null,
+      "events": [],
+      "detectedObjects": null
+    },
+    {
+      "id": 5,
+      "homeTeam": "Lions United",
+      "awayTeam": "Thunder FC",
+      "date": "2026-01-15T18:30:00Z",
+      "venue": "Lions Den",
+      "status": "scheduled",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "stats": null,
+      "events": [],
+      "detectedObjects": null
+    },
+    {
+      "id": 6,
+      "homeTeam": "Eagles FC",
+      "awayTeam": "Lions United",
+      "date": "2026-01-22T20:00:00Z",
+      "venue": "Eagles Arena",
+      "status": "scheduled",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "stats": null,
+      "events": [],
+      "detectedObjects": null
+    }
+  ],
+  "standings": [
+    {
+      "position": 1,
+      "team": "Thunder FC",
+      "played": 30,
+      "won": 20,
+      "drawn": 6,
+      "lost": 4,
+      "goalsFor": 65,
+      "goalsAgainst": 28,
+      "goalDifference": 37,
+      "points": 66
+    },
+    {
+      "position": 2,
+      "team": "Lions United",
+      "played": 30,
+      "won": 18,
+      "drawn": 7,
+      "lost": 5,
+      "goalsFor": 58,
+      "goalsAgainst": 32,
+      "goalDifference": 26,
+      "points": 61
+    },
+    {
+      "position": 3,
+      "team": "Eagles FC",
+      "played": 30,
+      "won": 15,
+      "drawn": 8,
+      "lost": 7,
+      "goalsFor": 52,
+      "goalsAgainst": 38,
+      "goalDifference": 14,
+      "points": 53
+    }
+  ]
+}

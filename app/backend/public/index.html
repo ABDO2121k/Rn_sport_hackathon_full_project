@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Stats - Player & Talent Scout Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            opacity: 0.95;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .tabs {
+            display: flex;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: 3px solid #dee2e6;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 24px;
+            border: none;
+            background: transparent;
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-button:hover {
+            background: rgba(102, 126, 234, 0.08);
+            color: #667eea;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            background: white;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 48px;
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Player Scanner Styles */
+        .qr-scanner-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 16px;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 32px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        #reader {
+            border: 4px solid #667eea;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 24px 0;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .player-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 32px;
+            box-shadow: 0 20px 40px rgba(245, 87, 108, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .player-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .player-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            font-weight: bold;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .player-info h2 {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .player-meta {
+            font-size: 1.2em;
+            opacity: 0.95;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 6px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .player-physical {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 24px 0;
+            backdrop-filter: blur(10px);
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .physical-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .player-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* AI Assistant Styles */
+        .ai-assistant {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .recruiter-form {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .form-title {
+            color: #1e293b;
+            font-size: 1.5em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .form-subtitle {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #334155;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .chat-container {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 24px;
+            min-height: 450px;
+            max-height: 550px;
+            overflow-y: auto;
+            margin-bottom: 24px;
+            border: 2px solid #e9ecef;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            padding: 16px 20px;
+            border-radius: 16px;
+            max-width: 85%;
+            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .message.assistant {
+            background: white;
+            color: #1e293b;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+        }
+
+        .message.assistant h1,
+        .message.assistant h2,
+        .message.assistant h3 {
+            margin-top: 16px;
+            margin-bottom: 12px;
+            color: #667eea;
+        }
+
+        .message.assistant h1 {
+            font-size: 1.5em;
+        }
+
+        .message.assistant h2 {
+            font-size: 1.3em;
+        }
+
+        .message.assistant h3 {
+            font-size: 1.1em;
+        }
+
+        .message.assistant ul,
+        .message.assistant ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .message.assistant li {
+            margin: 6px 0;
+        }
+
+        .message.assistant code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .message.assistant pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        .message.assistant pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .player-result {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 12px 0;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .player-result:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);
+        }
+
+        .player-result h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .player-result p {
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        button.secondary {
+            background: #e2e8f0;
+            color: #475569;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button.danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .input-container {
+            display: flex;
+            gap: 12px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+
+            0%,
+            20% {
+                content: '.';
+            }
+
+            40% {
+                content: '..';
+            }
+
+            60%,
+            100% {
+                content: '...';
+            }
+        }
+
+        .alert {
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 12px 0;
+            font-weight: 500;
+        }
+
+        .alert.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #fecaca;
+        }
+
+        .alert.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #a7f3d0;
+        }
+
+        .alert.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 2px solid #bfdbfe;
+        }
+
+        .quick-queries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .quick-query {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .quick-query:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+
+            .tab-content {
+                padding: 24px;
+            }
+
+            .player-stats {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>⚽ Sports Stats Portal</h1>
+                <p>Player Information & Talent Search Platform</p>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab(0)">
+                <span>📱</span> Player QR Scanner
+            </button>
+            <button class="tab-button" onclick="switchTab(1)">
+                <span>🔍</span> Talent Scout
+            </button>
+        </div>
+
+        <!-- Tab 1: QR Scanner -->
+        <div class="tab-content active" id="tab-0">
+            <div class="qr-scanner-container">
+                <h2 class="section-title">Scan Player QR Code</h2>
+                <p class="section-subtitle">
+                    Point your camera at a player's QR code to instantly view their complete stats and performance data
+                </p>
+
+                <div id="reader"></div>
+
+                <div style="text-align: center; margin: 24px 0;">
+                    <button onclick="startScanner()" id="startScanBtn">Start Scanner</button>
+                    <button onclick="stopScanner()" id="stopScanBtn" class="danger" style="display: none;">Stop
+                        Scanner</button>
+                </div>
+
+                <div style="text-align: center; margin: 24px 0;">
+                    <p style="color: #64748b; margin-bottom: 12px;">Or enter Player ID manually:</p>
+                    <div class="input-container" style="max-width: 450px; margin: 0 auto;">
+                        <input type="text" id="manualPlayerId" placeholder="Enter Player ID (e.g., 1)">
+                        <button onclick="loadPlayerById()">Load Player</button>
+                    </div>
+                </div>
+
+                <div id="playerInfo"></div>
+            </div>
+        </div>
+
+        <!-- Tab 2: AI Assistant -->
+        <div class="tab-content" id="tab-1">
+            <div class="ai-assistant">
+                <h2 class="section-title">Talent Scout Assistant</h2>
+                <p class="section-subtitle">
+                    Describe what kind of player you're looking for or save your search preferences
+                </p>
+
+                <!-- Recruiter Search Form -->
+                <div class="recruiter-form">
+                    <h3 class="form-title">💼 Save Your Search Preferences</h3>
+                    <p class="form-subtitle">Fill in your details and we'll send you matching players automatically</p>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" id="scoutName" placeholder="e.g., John Smith">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Email</label>
+                        <input type="email" id="scoutEmail" placeholder="e.g., john@agency.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Organization</label>
+                        <input type="text" id="scoutOrg" placeholder="e.g., Elite Sports Agency">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">What are you looking for?</label>
+                        <textarea id="scoutDescription" rows="3"
+                            placeholder="Describe the type of player you need (e.g., Young striker with high goal-scoring ability, good teamwork, under 25 years old)"></textarea>
+                    </div>
+
+                    <button onclick="saveRecruiterSearch()">💾 Save Search & Get Matches</button>
+                </div>
+
+                <div class="quick-queries">
+                    <span class="quick-query" onclick="setQuery('Find young forwards under 25 with at least 15 goals')">
+                        🎯 Young strikers
+                    </span>
+                    <span class="quick-query"
+                        onclick="setQuery('I need a midfielder with excellent passing accuracy above 85%')">
+                        ⚡ Skilled midfielders
+                    </span>
+                    <span class="quick-query" onclick="setQuery('Find tall defenders over 185cm with good tackling')">
+                        🛡️ Strong defenders
+                    </span>
+                    <span class="quick-query"
+                        onclick="setQuery('Show me experienced goalkeepers with high save percentage')">
+                        🧤 Goalkeepers
+                    </span>
+                </div>
+
+                <div class="chat-container" id="chatContainer">
+                    <div class="message assistant">
+                        <strong>Scout:</strong> Hello! I'm here to help you find the perfect players.
+                        What kind of player are you looking for today?
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <textarea id="userQuery" rows="2"
+                        placeholder="E.g., I need a young forward with at least 15 goals and good assists..."></textarea>
+                    <button onclick="sendQuery()" id="sendBtn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000';
+        let html5QrCode = null;
+
+        // Tab switching
+        function switchTab(tabIndex) {
+            document.querySelectorAll('.tab-button').forEach((btn, index) => {
+                btn.classList.toggle('active', index === tabIndex);
+            });
+            document.querySelectorAll('.tab-content').forEach((content, index) => {
+                content.classList.toggle('active', index === tabIndex);
+            });
+        }
+
+        // QR Scanner functions
+        async function startScanner() {
+            try {
+                html5QrCode = new Html5Qrcode("reader");
+
+                await html5QrCode.start(
+                    { facingMode: "environment" },
+                    { fps: 10, qrbox: { width: 250, height: 250 } },
+                    onScanSuccess,
+                    onScanFailure
+                );
+
+                document.getElementById('startScanBtn').style.display = 'none';
+                document.getElementById('stopScanBtn').style.display = 'inline-block';
+            } catch (error) {
+                alert('Error starting camera: ' + error);
+            }
+        }
+
+        async function stopScanner() {
+            if (html5QrCode) {
+                await html5QrCode.stop();
+                document.getElementById('startScanBtn').style.display = 'inline-block';
+                document.getElementById('stopScanBtn').style.display = 'none';
+            }
+        }
+
+        function onScanSuccess(decodedText) {
+            let playerId = decodedText;
+            if (decodedText.includes('player_id=')) {
+                playerId = decodedText.split('player_id=')[1].split('&')[0];
+            }
+
+            loadPlayerInfo(playerId);
+            stopScanner();
+        }
+
+        function onScanFailure(error) {
+            // Ignore
+        }
+
+        async function loadPlayerById() {
+            const playerId = document.getElementById('manualPlayerId').value;
+            if (!playerId) {
+                alert('Please enter a Player ID');
+                return;
+            }
+            await loadPlayerInfo(playerId);
+        }
+
+        async function loadPlayerInfo(playerId) {
+            try {
+                const response = await fetch(`${API_BASE}/api/players/${playerId}`);
+
+                if (!response.ok) {
+                    throw new Error('Player not found');
+                }
+
+                const player = await response.json();
+                displayPlayerInfo(player);
+            } catch (error) {
+                document.getElementById('playerInfo').innerHTML = `
+                    <div class="alert error">
+                        ❌ Error: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        function displayPlayerInfo(player) {
+            const initials = player.name.split(' ').map(n => n[0]).join('');
+
+            const statsHtml = Object.entries(player.stats)
+                .map(([key, value]) => `
+                    <div class="stat-card">
+                        <div class="stat-label">${formatLabel(key)}</div>
+                        <div class="stat-value">${value}${key.includes('Accuracy') || key.includes('Percentage') ? '%' : ''}</div>
+                    </div>
+                `).join('');
+
+            document.getElementById('playerInfo').innerHTML = `
+                <div class="player-card">
+                    <div class="player-card-content">
+                        <div class="player-header">
+                            <div class="player-avatar">${initials}</div>
+                            <div class="player-info">
+                                <h2>${player.name}</h2>
+                                <div class="player-meta">
+                                    <span class="meta-badge">${player.position}</span>
+                                    <span class="meta-badge">${player.team}</span>
+                                    <span class="meta-badge">#${player.jerseyNumber}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="player-physical">
+                            <div class="physical-item">
+                                <strong>🎂 Age:</strong> ${player.physical.age} years
+                            </div>
+                            <div class="physical-item">
+                                <strong>📏 Height:</strong> ${player.physical.height} cm
+                            </div>
+                            <div class="physical-item">
+                                <strong>⚖️ Weight:</strong> ${player.physical.weight} kg
+                            </div>
+                        </div>
+                        <div class="player-stats">
+                            ${statsHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatLabel(key) {
+            return key.replace(/([A-Z])/g, ' $1').trim()
+                .split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+
+        // AI Assistant functions
+        function setQuery(query) {
+            document.getElementById('userQuery').value = query;
+        }
+
+        async function saveRecruiterSearch() {
+            const name = document.getElementById('scoutName').value.trim();
+            const email = document.getElementById('scoutEmail').value.trim();
+            const org = document.getElementById('scoutOrg').value.trim();
+            const description = document.getElementById('scoutDescription').value.trim();
+
+            if (!name || !email || !description) {
+                alert('Please fill in your name, email, and what you\'re looking for');
+                return;
+            }
+
+            try {
+                // Use AI to process the recruiter's request
+                const message = `I am ${name} from ${org || 'an organization'}. My email is ${email}. ${description}. Please find matching players and send them to my email.`;
+
+                const response = await fetch(`${API_BASE}/api/ai/process-request`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('chatContainer').innerHTML = `
+                        <div class="alert success">
+                            ✅ Search saved successfully! You'll receive matching players via email shortly.
+                        </div>
+                    `;
+
+                    // Clear form
+                    document.getElementById('scoutName').value = '';
+                    document.getElementById('scoutEmail').value = '';
+                    document.getElementById('scoutOrg').value = '';
+                    document.getElementById('scoutDescription').value = '';
+                } else {
+                    throw new Error(result.error || 'Failed to save search');
+                }
+            } catch (error) {
+                document.getElementById('chatContainer').innerHTML = `
+                    <div class="alert error">
+                        ❌ Error: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        async function sendQuery() {
+            const queryInput = document.getElementById('userQuery');
+            const query = queryInput.value.trim();
+
+            if (!query) {
+                alert('Please enter a query');
+                return;
+            }
+
+            addMessage('user', query);
+            queryInput.value = '';
+
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Thinking...';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/ai/process-request`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: query })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Parse and render markdown
+                    const htmlContent = marked.parse(result.aiResponse || '');
+                    addMessageHTML('assistant', htmlContent);
+
+                    if (result.functionResult && result.functionResult.result && result.functionResult.result.players) {
+                        displayPlayers(result.functionResult.result.players);
+                    }
+                } else {
+                    addMessage('assistant', '❌ Error: ' + result.error);
+                }
+            } catch (error) {
+                addMessage('assistant', '❌ Error: ' + error.message);
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send';
+            }
+        }
+
+        function addMessage(role, content) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            messageDiv.innerHTML = `<strong>${role === 'user' ? 'You' : 'Scout'}:</strong> ${content}`;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function addMessageHTML(role, htmlContent) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            messageDiv.innerHTML = `<strong>Scout:</strong><br>${htmlContent}`;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function displayPlayers(players) {
+            const chatContainer = document.getElementById('chatContainer');
+
+            players.forEach(player => {
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player-result';
+                playerDiv.innerHTML = `
+                    <h4>⚽ ${player.name} - ${player.position}</h4>
+                    <p><strong>Team:</strong> ${player.team} | <strong>Age:</strong> ${player.physical.age} | <strong>Height:</strong> ${player.physical.height}cm</p>
+                    <p><strong>Key Stats:</strong> 
+                        ${player.stats.goals !== undefined ? `Goals: ${player.stats.goals} | ` : ''}
+                        ${player.stats.assists !== undefined ? `Assists: ${player.stats.assists} | ` : ''}
+                        ${player.stats.passAccuracy !== undefined ? `Pass Accuracy: ${player.stats.passAccuracy}% | ` : ''}
+                        ${player.stats.tackles !== undefined ? `Tackles: ${player.stats.tackles} | ` : ''}
+                        ${player.stats.saves !== undefined ? `Saves: ${player.stats.saves} | ` : ''}
+                        Games: ${player.stats.gamesPlayed}
+                    </p>
+                `;
+                chatContainer.appendChild(playerDiv);
+            });
+
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        document.getElementById('userQuery').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendQuery();
+            }
+        });
+    </script>
+</body>
+
+</html>
